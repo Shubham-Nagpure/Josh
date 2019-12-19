@@ -75,17 +75,17 @@ def play
   end
 end
 
-  #Start_Menu
-  puts "****** HANGMAN GAME ******"
-  puts "\t1:PLAY"
-  puts "\t2:EXIT"
-  puts "**************************"
-  print "Enter choice:"
-  choice =  gets.chomp.to_i
+#Start_Menu
+puts "****** HANGMAN GAME ******"
+puts "\t1:PLAY"
+puts "\t2:EXIT"
+puts "**************************"
+print "Enter choice:"
+choice =  gets.chomp.to_i
 
-  if choice == 1
-    play
-  else
-    exit
-  end
+if choice == 1
+  play
+else
+  exit
+end
 
