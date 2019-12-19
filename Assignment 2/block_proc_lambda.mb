@@ -1,0 +1,76 @@
+Q:Try multiple yields:
+  2.6.5 :023 > def try_multi
+  2.6.5 :024?>   first='josh'
+  2.6.5 :025?>   last='software'
+  2.6.5 :026?>   yield(first,last)
+  2.6.5 :027?>   yield(first,last)
+  2.6.5 :028?>   yield(first,last)
+  2.6.5 :031?>   end
+  => :try_multi 
+  2.6.5 :032 > try_multi do |first,last|
+  2.6.5 :033 >     puts"Yield succussfully run in #{first}#{last}."
+  2.6.5 :034?>   end
+  Yield succussfully run in joshsoftware.
+  Yield succussfully run in joshsoftware.
+  Yield succussfully run in joshsoftware.
+  => nil 
+  2.6.5 :064 > def try_multi(a=10,b=20)
+  2.6.5 :066?>   sum=yield(a,b)+yield(a,b)
+  2.6.5 :067?>   yield(sum,a+b)
+  2.6.5 :068?>   end
+  => :try_multi 
+  2.6.5 :069 > try_multi(20,20) do |a,b|
+  2.6.5 :070 >     a+b
+  2.6.5 :071?>   end
+  => 120 
+  2.6.5 :088 > def try_multi(a=10,b=20)
+  2.6.5 :089?>   yield(yield(a,b),a+b)
+  2.6.5 :090?>   end
+  => :try_multi 
+  2.6.5 :091 > try_multi(20,20) do |a,b|
+  2.6.5 :092 >     a+b
+  2.6.5 :093?>   end
+  => 80 
+  2.6.5 :100 > def try_multi(a=10,b=20)
+  2.6.5 :101?>   yield(yield(yield(a,b),b),a+b)
+  2.6.5 :102?>   end
+  => :try_multi 
+  2.6.5 :103 > try_multi(20,20) do |a,b|
+  2.6.5 :104 >     a+b
+  2.6.5 :105?>   end
+  => 100 
+  2.6.5 :106 > def try_multi(a=10,b=20)
+  2.6.5 :107?>   yield(yield(yield(a,b),b),a+b)
+  2.6.5 :108?>   end
+  => :try_multi 
+  2.6.5 :109 > try_multi(20) do |a,b|
+  2.6.5 :110 >     a+b
+  2.6.5 :111?>   end
+  => 100 
+
+Q:What happens if block is not passed to a function?
+  =: When we not pass block to the function then “LocalJumperror (no block given (yield))” occurs. 
+
+Q:How to check whether block is sent explicitly?
+  =:To check whether block is send explicitly so we have to use if block_given?
+  It means that block which could be passed into the method, is evaluated with yield operator, in other words, so we know that block is pass explicitly.
+
+Q:How to pass a block implicitly?
+  =:Implicit block passing works by calling the yield keyword in a method. The yield keyword is special. It finds and calls a passed block, so you don’t have to add the block to the   list of arguments the method accepts.
+
+Q:What are the different ways to call lambda?
+  =: Suppose lambda name test
+  1. test.call()
+  2. test.()
+  3. test[]
+  4. test.===
+
+Q:Find differences between lambda and proc.
+  =:1.Proc doesn’t check parameters passed but lambda does.
+  In proc we define 2 parameter and pass only one after that it not give error untill block uses 2nd parameter or if we pass three parameter then proc ignore 3rd parameter.
+  But lambda give us an error that is wrong number of arguments
+  2.Proc returns from the calling methods, while Lambda doesn’t
+
+Q:Why to use proc and lambda?
+ =: Proc are blocks of code that have been bound to a set of local variables. Once bound, the code may be called in different contexts and still access those variables.
+  Lambda have their own context.
