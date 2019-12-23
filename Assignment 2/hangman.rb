@@ -1,4 +1,4 @@
-@hangman_word_dataset = [["josh", "software", "ubuntu", "linux", "nebula", "grow"], ["reward", "educate", "passion", "trust", "method", "bottle"], ["one", "two", "three", "four", "five", "six"] ]
+@hangman_word_dataset = [["josh", "software", "ubuntu", "linux", "nebula", "grow"], ["reward", "educate", "passion", "trust", "method", "bottle"], ["unstoppable", "yourself", "believe", "innovation", "blogger", "six"] ]
 
 def check_word(user_guess,check_string,blank_arr,guess_word_length)
   flag=false
@@ -17,10 +17,9 @@ end
 def play
   remaining_chances= 5
   current_stage = 0 
-  type_word_container = '_'
-
   while current_stage<@hangman_word_dataset.length
 
+    type_word_container = '_'
     check_string = @hangman_word_dataset[current_stage].sample
     blank_arr=Array.new(check_string.length) { "_" }
     guess_word_length=check_string.length
@@ -40,9 +39,12 @@ def play
       user_guess=gets.chomp
 
       if(type_word_container.include? user_guess)
+        flag=true
         puts "You already guess this letter"
+      else
+        flag,guess_word_length=check_word(user_guess,check_string,blank_arr,guess_word_length)
       end
-      flag,guess_word_length=check_word(user_guess,check_string,blank_arr,guess_word_length)
+
       if flag!=true
         print "match not foound\n"
         remaining_chances-=1
